@@ -3,15 +3,19 @@ import Combine
 import CoreLocation
 
 public protocol LocationControllerProtocol {
+    var model: LocationModel { get }
     func toggle() -> Void
 }
 
 public class LocationController: NSObject, CLLocationManagerDelegate, LocationControllerProtocol {
     private let manager: CLLocationManager
-    public var locationPublisher = PassthroughSubject<CLLocation, Never>()
+    private var locationPublisher = PassthroughSubject<CLLocation, Never>()
     public var model: LocationModel = LocationModel()
+
+    public var publisher: AnyPublisher<CLLocation, Never>
     
     public override init() {
+        self.publisher = AnyPublisher(self.locationPublisher)
         self.manager = CLLocationManager()
         super.init()
         self.manager.delegate = self
