@@ -11,6 +11,10 @@ public struct LocationView: View {
             Text("\(model.description)")
         }
     }
+    public init(controller: LocationControllerProtocol, model: LocationModel) {
+        self.controller = controller
+        self.model = model
+    }
 }
 
 struct LocationView_Previews: PreviewProvider {
