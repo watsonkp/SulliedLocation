@@ -9,30 +9,30 @@ public protocol LocationControllerProtocol {
 public class LocationController: NSObject, CLLocationManagerDelegate, LocationControllerProtocol {
     private let manager: CLLocationManager
     public var locationPublisher = PassthroughSubject<CLLocation, Never>()
-    public var model: LocationModel? = nil
+    public var model: LocationModel = LocationModel()
     
-    public init(_ manager: CLLocationManager) {
-        self.manager = manager
+    public override init() {
+        self.manager = CLLocationManager()
+        super.init()
+        self.manager.delegate = self
     }
     
     public func toggle() {
-        if let model = model {
-            if model.updating {
-                manager.stopUpdatingLocation()
-                model.updating = false
-            } else {
-                // Configure the location manager
-                // TODO: Does order matter? Document outcome of testing.
-                manager.pausesLocationUpdatesAutomatically = false
-                manager.activityType = CLActivityType.fitness
-                manager.desiredAccuracy = kCLLocationAccuracyBest
+        if model.updating {
+            manager.stopUpdatingLocation()
+            model.updating = false
+        } else {
+            // Configure the location manager
+            // TODO: Does order matter? Document outcome of testing.
+            manager.pausesLocationUpdatesAutomatically = false
+            manager.activityType = CLActivityType.fitness
+            manager.desiredAccuracy = kCLLocationAccuracyBest
 //                manager.allowsBackgroundLocationUpdates = true
-                manager.showsBackgroundLocationIndicator = true
+            manager.showsBackgroundLocationIndicator = true
 
-                manager.requestWhenInUseAuthorization()
-                manager.startUpdatingLocation()
-                model.updating = true
-            }
+            manager.requestWhenInUseAuthorization()
+            manager.startUpdatingLocation()
+            model.updating = true
         }
     }
 
@@ -108,11 +108,9 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             locationPublisher.send(location)
-            if let model = model {
-                model.timestamp = location.timestamp
-                model.longitude = location.coordinate.longitude
-                model.latitude = location.coordinate.latitude
-            }
+            model.timestamp = location.timestamp
+            model.longitude = location.coordinate.longitude
+            model.latitude = location.coordinate.latitude
         }
     }
 
