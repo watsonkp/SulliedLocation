@@ -8,7 +8,7 @@ public protocol LocationControllerProtocol {
 
 public class LocationController: NSObject, CLLocationManagerDelegate, LocationControllerProtocol {
     private let manager: CLLocationManager
-    private var locationPublisher = PassthroughSubject<CLLocation, Never>()
+    public var locationPublisher = PassthroughSubject<CLLocation, Never>()
     public var model: LocationModel? = nil
     
     public init(_ manager: CLLocationManager) {
