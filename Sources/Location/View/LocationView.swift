@@ -20,6 +20,6 @@ public struct LocationView: View {
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         LocationView(controller: DesignTimeLocationController(),
-                     model: DesignTimeModel.populatedModel())
+                     model: DesignTimeLocationModel.populatedModel())
     }
 }

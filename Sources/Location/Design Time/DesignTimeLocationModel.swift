@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-public class DesignTimeModel {
+public class DesignTimeLocationModel {
     static func populatedModel() -> LocationModel {
         let location = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 25.0, longitude: -75.0),
                                   altitude: 100.0,
