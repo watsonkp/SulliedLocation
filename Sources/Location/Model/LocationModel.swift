@@ -16,7 +16,7 @@ public class LocationModel: ObservableObject {
         }
     }
     
-    init() {
+    public init() {
         self.timestamp = nil
         self.longitude = nil
         self.latitude = nil
@@ -25,7 +25,7 @@ public class LocationModel: ObservableObject {
         self.dateFormatter.timeStyle = .medium
     }
     
-    init(_ location: CLLocation) {
+    public init(_ location: CLLocation) {
         self.timestamp = location.timestamp
         self.longitude = location.coordinate.longitude
         self.latitude = location.coordinate.latitude
