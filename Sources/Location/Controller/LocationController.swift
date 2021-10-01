@@ -9,9 +9,9 @@ public protocol LocationControllerProtocol {
 public class LocationController: NSObject, CLLocationManagerDelegate, LocationControllerProtocol {
     private let manager: CLLocationManager
     private var locationPublisher = PassthroughSubject<CLLocation, Never>()
-    var model: LocationModel? = nil
+    public var model: LocationModel? = nil
     
-    init(_ manager: CLLocationManager) {
+    public init(_ manager: CLLocationManager) {
         self.manager = manager
     }
     
