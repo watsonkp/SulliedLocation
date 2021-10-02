@@ -12,4 +12,12 @@ public class DesignTimeLocationModel {
                                   timestamp: Date())
         return LocationModel(location)
     }
+
+    public static func populatedServiceModel() -> LocationServicesModel {
+        let model = LocationServicesModel()
+        model.enabled = true
+        model.authorization = "Authorized when in use"
+        model.error = "nil"
+        return model
+    }
 }

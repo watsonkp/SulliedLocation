@@ -4,6 +4,7 @@ import CoreLocation
 
 public protocol LocationControllerProtocol {
     var model: LocationModel { get }
+    var serviceModel: LocationServicesModel { get }
     func toggle() -> Void
 }
 
@@ -11,12 +12,14 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
     private let manager: CLLocationManager
     private var locationPublisher = PassthroughSubject<CLLocation, Never>()
     public var model: LocationModel = LocationModel()
+    public var serviceModel = LocationServicesModel()
 
     public var publisher: AnyPublisher<CLLocation, Never>
     
     public override init() {
         self.publisher = AnyPublisher(self.locationPublisher)
         self.manager = CLLocationManager()
+        serviceModel.enabled = CLLocationManager.locationServicesEnabled()
         super.init()
         self.manager.delegate = self
     }
@@ -46,16 +49,22 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
         switch manager.authorizationStatus {
         case .notDetermined:
             NSLog("didChangeAuthorization: not determined")
+            serviceModel.authorization = "Not determined"
         case .restricted:
             NSLog("didChangeAuthorization: restricted")
+            serviceModel.authorization = "Restricted"
         case .denied:
             NSLog("didChangeAuthorization: denied")
+            serviceModel.authorization = "Denied"
         case .authorizedAlways:
             NSLog("didChangeAuthorization: authorized always")
+            serviceModel.authorization = "Authorized always"
         case .authorizedWhenInUse:
             NSLog("didChangeAuthorization: authorized when in use")
+            serviceModel.authorization = "Authorized when in use"
         @unknown default:
             NSLog("didChangeAuthorization: WARNING unknown")
+            serviceModel.authorization = "Unrecognized"
         }
     }
 
@@ -105,6 +114,7 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
             @unknown default:
                 NSLog("CLError.Code unknown value \(clError.code)")
             }
+            serviceModel.error = "Code \(clError.code)"
         }
     }
 
