@@ -1,13 +1,17 @@
 import SwiftUI
 
-struct LocationServiceView: View {
+public struct LocationServiceView: View {
     @ObservedObject var model: LocationServicesModel
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("Enabled: \(model.enabled ? "True" : "False")")
             Text("Authorization: \(model.authorization)")
             Text("Error: \(model.error)")
         }
+    }
+
+    public init(model: LocationServicesModel) {
+        self.model = model
     }
 }
 
