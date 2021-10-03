@@ -5,7 +5,7 @@ import CoreLocation
 public protocol LocationControllerProtocol {
     var model: LocationModel { get }
     var serviceModel: LocationServicesModel { get }
-    func toggle() -> Void
+    func toggle(always: Bool, background: Bool) -> Void
 }
 
 public class LocationController: NSObject, CLLocationManagerDelegate, LocationControllerProtocol {
@@ -24,7 +24,7 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
         self.manager.delegate = self
     }
     
-    public func toggle() {
+    public func toggle(always: Bool, background: Bool) {
         if model.updating {
             manager.stopUpdatingLocation()
             model.updating = false
@@ -34,10 +34,16 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
             manager.pausesLocationUpdatesAutomatically = false
             manager.activityType = CLActivityType.fitness
             manager.desiredAccuracy = kCLLocationAccuracyBest
-//                manager.allowsBackgroundLocationUpdates = true
+            if background {
+                manager.allowsBackgroundLocationUpdates = true
+            }
             manager.showsBackgroundLocationIndicator = true
 
-            manager.requestWhenInUseAuthorization()
+            if always {
+                manager.requestAlwaysAuthorization()
+            } else {
+                manager.requestWhenInUseAuthorization()
+            }
             manager.startUpdatingLocation()
             model.updating = true
         }

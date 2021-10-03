@@ -5,7 +5,7 @@ public struct LocationView: View {
     @ObservedObject var model: LocationModel
     public var body: some View {
         VStack {
-            Button(action: { controller.toggle() }) {
+            Button(action: { controller.toggle(always: false, background: false) }) {
                 Text("\(model.updating ? "Stop" : "Start")")
             }
             Text("\(model.description)")
