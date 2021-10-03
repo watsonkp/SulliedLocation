@@ -1,5 +1,5 @@
 import XCTest
-@testable import Location
+@testable import SulliedLocation
 
 final class LocationTests: XCTestCase {
     func testExample() throws {
