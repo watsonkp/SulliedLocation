@@ -83,6 +83,8 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
                 NSLog("the location manager was unable to obtain a location value right now")
             case .denied:
                 NSLog("User denied access to the location service")
+                // Recommended behaviour: https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423786-locationmanager
+                manager.stopUpdatingLocation()
             case .network:
                 NSLog("Network was unavailable or a network error occurred")
             case .headingFailure:
