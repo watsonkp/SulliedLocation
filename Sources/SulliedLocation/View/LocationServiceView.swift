@@ -13,9 +13,7 @@ public struct LocationServiceView: View {
                 Toggle("Update location", isOn: $model.updating)
                     .onChange(of: model.updating) { value in
                         NSLog("DEBUG: Toggle model updating \(model.updating) to \(value)")
-                        if model.updating != value {
-                            controller.toggle(always: always, background: background)
-                        }
+                        controller.toggle(always: always, background: background)
                     }
             }
         } else {
