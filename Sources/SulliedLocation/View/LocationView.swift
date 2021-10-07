@@ -3,7 +3,12 @@ import SwiftUI
 public struct LocationView: View {
     @ObservedObject var model: LocationModel
     public var body: some View {
-        Text("\(model.description)")
+        VStack(alignment: .leading) {
+            Text("\(model.description)")
+                .font(.body)
+            Text("Updated \(model.lastUpdateDescription)")
+                .font(.footnote)
+        }
     }
     public init(model: LocationModel) {
         self.model = model
