@@ -7,15 +7,22 @@ public struct LocationServiceView: View {
     var background: Bool
     public var body: some View {
         if model.enabled {
-            VStack(alignment: .leading) {
-                Text("Authorization: \(model.authorization)")
-                Text("Error: \(model.error)")
-                Toggle("Update location", isOn: $model.updating)
-                    .onChange(of: model.updating) { value in
-                        NSLog("DEBUG: Toggle model updating \(model.updating) to \(value)")
-                        controller.toggle(always: always, background: background)
+            Toggle(isOn: $model.updating) {
+                VStack(alignment: .leading) {
+                    Text("Location updates")
+                        .font(.headline)
+                    Text(model.authorization)
+                        .font(.subheadline)
+                    if model.error != nil {
+                        Text("\(model.error!)")
                     }
-            }
+                    Text("Updated at \(model.lastUpdateDescription)")
+                        .font(.subheadline)
+                }
+            }.onChange(of: model.updating) { value in
+                    NSLog("DEBUG: Toggle model updating \(model.updating) to \(value)")
+                    controller.toggle(always: always, background: background)
+                }
         } else {
             Text("Need to enable location services in settings")
         }

@@ -133,6 +133,7 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
             model.timestamp = location.timestamp
             model.longitude = location.coordinate.longitude
             model.latitude = location.coordinate.latitude
+            serviceModel.lastUpdate = location.timestamp
         }
     }
 

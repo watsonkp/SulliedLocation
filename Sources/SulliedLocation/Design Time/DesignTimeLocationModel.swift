@@ -17,7 +17,8 @@ public class DesignTimeLocationModel {
         let model = LocationServicesModel()
         model.enabled = true
         model.authorization = "Authorized when in use"
-        model.error = "nil"
+        model.error = nil
+        model.lastUpdate = Date()
         return model
     }
 }
