@@ -27,7 +27,6 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
     public func toggle(always: Bool, background: Bool) {
         if model.updating {
             manager.stopUpdatingLocation()
-            model.updating = false
         } else {
             // Configure the location manager
             // TODO: Does order matter? Document outcome of testing.
@@ -45,7 +44,6 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
                 manager.requestWhenInUseAuthorization()
             }
             manager.startUpdatingLocation()
-            model.updating = true
         }
     }
 
