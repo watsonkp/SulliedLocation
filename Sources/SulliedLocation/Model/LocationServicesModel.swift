@@ -5,7 +5,7 @@ public class LocationServicesModel: ObservableObject {
     @Published var updating = false
     @Published var authorization: String = "Not determined"
     @Published var error: String? = nil
-    var lastUpdate: Date? = nil
+    @Published var lastUpdate: Date? = nil
     private let dateFormatter: DateFormatter
 
     var lastUpdateDescription: String {

@@ -17,6 +17,7 @@ public struct LocationView: View {
 
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationView(model: DesignTimeLocationModel.populatedModel())
+        let controller = DesignTimeLocationController()
+        LocationView(model: controller.model)
     }
 }

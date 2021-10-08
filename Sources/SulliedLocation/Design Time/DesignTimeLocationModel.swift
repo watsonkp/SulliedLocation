@@ -16,6 +16,7 @@ public class DesignTimeLocationModel {
     public static func populatedServiceModel() -> LocationServicesModel {
         let model = LocationServicesModel()
         model.enabled = true
+        model.updating = true
         model.authorization = "Authorized when in use"
         model.error = nil
         model.lastUpdate = Date()
