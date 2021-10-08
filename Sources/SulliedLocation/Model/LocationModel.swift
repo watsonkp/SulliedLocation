@@ -2,7 +2,6 @@ import Foundation
 import CoreLocation
 
 public class LocationModel: ObservableObject {
-    @Published var updating: Bool = false
     @Published var timestamp: Date?
     @Published var longitude: CLLocationDegrees?
     @Published var latitude: CLLocationDegrees?

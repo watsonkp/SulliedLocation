@@ -25,7 +25,7 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
     }
     
     public func toggle(always: Bool, background: Bool) {
-        if model.updating {
+        if serviceModel.updating {
             manager.stopUpdatingLocation()
         } else {
             // Configure the location manager
