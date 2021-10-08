@@ -26,8 +26,6 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
     
     public func toggle(always: Bool, background: Bool) {
         if serviceModel.updating {
-            manager.stopUpdatingLocation()
-        } else {
             // Configure the location manager
             // TODO: Does order matter? Document outcome of testing.
             manager.pausesLocationUpdatesAutomatically = false
@@ -44,6 +42,8 @@ public class LocationController: NSObject, CLLocationManagerDelegate, LocationCo
                 manager.requestWhenInUseAuthorization()
             }
             manager.startUpdatingLocation()
+        } else {
+            manager.stopUpdatingLocation()
         }
     }
 
